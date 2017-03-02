@@ -81,3 +81,32 @@ printf(" 0 1 2 3 4 5 6 7 8 9 1011121314151617181920\n");
     putchar ('\n');
   }
 }
+
+Cases * choosepoint(Cases *grille)
+{
+  int x;
+  int y;
+  char xget[3];
+  char yget[3];
+  int verif;
+  verif = 1;
+
+  while(verif == 1)
+  {
+    printf("Choisir la case x : ");
+    scanf("%d", &x);
+    getchar();
+    printf("Choisir la case y :");
+    scanf("%d", &y);
+    putchar('\n');
+
+    if(x > 20 || y > 20)
+      verif = 1;
+    else
+      verif = 0;
+    }
+    printf("vous avez choisit la case en x %d et en y %d", x,y);
+    (*(grille+20*y+x)).etat = 1;
+    return grille;
+
+  }

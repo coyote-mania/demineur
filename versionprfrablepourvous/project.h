@@ -19,6 +19,7 @@ Cases * putbomber(Cases * grille, int NumberOfBomber);
 
 void printgrille(Cases *grille);
 
+Cases * choosepoint(Cases *grille);
 // grille[x][y].values = '@';
 
 #endif
