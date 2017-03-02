@@ -25,7 +25,7 @@ Cases *    putpoint(int sizex, int sizey)
     return grille; //renvoi grille (adresse)
 }
 
-
+// Cette fonction dispose des mines de manièe aléatoire dans la grille
 Cases * putbomber(Cases * grille, int NumberOfBomber)
 {
   int x;
@@ -52,7 +52,7 @@ Cases * putbomber(Cases * grille, int NumberOfBomber)
   return grille;
 }
 
-
+// Cette fonction à pour but d'afficher la grille
 void printgrille(Cases *grille)
 {
   int x;
@@ -69,7 +69,7 @@ printf(" 0 1 2 3 4 5 6 7 8 9 1011121314151617181920\n");
     printf("%2d ", yprint);
     while(x < 20)
     {
-      if((*(grille+20*y+x)).etat == 0)
+      if((*(grille+20*y+x)).etat == 1)
         printf("%c ", (*(grille+20*y+x)).values );
       else
         printf("# ");
@@ -81,15 +81,13 @@ printf(" 0 1 2 3 4 5 6 7 8 9 1011121314151617181920\n");
     putchar ('\n');
   }
 }
-
-Cases * choosepoint(Cases *grille)
+// Cette fonction à pour but de récupérer les coordonnées x et y de l'utilisateur
+Cases * choosepoint(Cases *grille, int *statex, int *statey )
 {
   int x;
   int y;
-  char xget[3];
-  char yget[3];
   int verif;
-  verif = 1;
+  verif = 1; // Variable bouléenne qui sert à vérifier si la condition de sortie de la boucle est correct ou non
 
   while(verif == 1)
   {
@@ -100,13 +98,32 @@ Cases * choosepoint(Cases *grille)
     scanf("%d", &y);
     putchar('\n');
 
-    if(x > 20 || y > 20)
+    if(x > 20 || y > 20) // vérifie si les cooédronnés sélectionnés sont bien inférieurs à 20
       verif = 1;
     else
       verif = 0;
     }
-    printf("vous avez choisit la case en x %d et en y %d", x,y);
+    printf("vous avez choisit la case en x %d et en y %d\n", x,y);
+    x--; // ajuste le positionnement des x et y.
+    y--;
     (*(grille+20*y+x)).etat = 1;
-    return grille;
 
+    *statex = x;
+    *statey = y;
+    return grille;
   }
+
+// Si la case sélectionnée n'a pas de de mines de nombre alors mettre en valeurs un point (.)
+int   ifnothing(Cases *grille, int *xstate, int *ystate)
+{
+  int x;
+  int y;
+
+  x = *xstate;
+  y = *ystate;
+
+  if((*(grille+20*y+x)).etat == 1 && (*(grille+20*y+x)).values != '@') // dans le cas où la case sélectionné est ni une bombe.
+    return 0;
+  else
+    return 1;
+}

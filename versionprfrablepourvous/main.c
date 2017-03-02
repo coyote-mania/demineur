@@ -2,6 +2,13 @@
 
 int   main(void)
 {
+
+int statex;
+int statey;
+
+statex = 0;
+statey = 0;
+
   Cases *g = NULL;
   g = putpoint( 19, 19);
 
@@ -9,8 +16,15 @@ int   main(void)
   {
     g = putbomber(g, 9);
     printgrille(g);
-    choosepoint(g);
+    while((*(g+20*statey+statex)).values != '@')
+    {
+    choosepoint(g, &statex, &statey);
+    if(ifnothing(g, &statex, &statey) == 0)
+        (*(g+20*statey+statex)).values = '.';
+    printgrille(g);
   }
+  }
+
 
   return 0;
 }
