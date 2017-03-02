@@ -9,9 +9,9 @@ Cases *    putpoint(int sizex, int sizey)
 
 
   Cases *grille = (Cases*) calloc( sizex*sizey, sizeof (Cases) );
-  while(y < 19)
+  while(y <= 20)
   {
-    while(x < 19)
+    while(x <= 20)
     {
       (*(grille+20*y+x)).values = '#';
       (*(grille+20*y+x)).etat = 0;
@@ -57,44 +57,27 @@ void printgrille(Cases *grille)
 {
   int x;
   int y;
+  int yprint;
 
+  yprint= 1;
   x = 0;
   y = 0;
 
-  while(y < 19)
+printf(" 0 1 2 3 4 5 6 7 8 9 1011121314151617181920\n");
+  while(y < 20)
   {
-    while(x < 19)
+    printf("%2d ", yprint);
+    while(x < 20)
     {
       if((*(grille+20*y+x)).etat == 0)
-        printf("%c", (*(grille+20*y+x)).values );
-      putchar('#');
+        printf("%c ", (*(grille+20*y+x)).values );
+      else
+        printf("# ");
       x++;
     }
     x = 0;
     y++;
+    yprint++;
     putchar ('\n');
   }
 }
-
-
-
- /* int   main()
-{
-  Cases *g = NULL;
-  g = putpoint( 20, 20);
-
-  if(g != NULL){
-        g = putbomber(g, 9);
-         printf("adresse plateau %4X\n",(int )g);
-	for( int j=0;j < 19; j++)
-	{
-		for( int i=0;i < 19; i++)
-		printf("case %d %d = %c \t",j,i,(*(g+20*j+i)).values);
-
-		printf("\n");
-	}
-  free(g);
-  }
- return 0;
-}
-*/
